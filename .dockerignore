@@ -1,0 +1,14 @@
+.git
+.cache
+.devcontainer
+.github
+node_modules
+vendor
+build
+coverage
+.env
+wp-config.php
+wp-tests-config.php
+src/wp-content/database
+src/wp-content/uploads
+src/wp-content/debug.log

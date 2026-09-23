@@ -1,0 +1,20 @@
+services:
+  wordpress:
+    build:
+      context: .
+      dockerfile: Dockerfile.single
+    ports:
+      - "127.0.0.1:${HTTP_PORT:-8080}:80"
+    environment:
+      WORDPRESS_URL: "${WORDPRESS_URL:-http://localhost:8080}"
+      WORDPRESS_TITLE: "${WORDPRESS_TITLE:-MosaicPress}"
+      WORDPRESS_ADMIN_USER: "${WORDPRESS_ADMIN_USER:-admin}"
+      WORDPRESS_ADMIN_PASSWORD: "${WORDPRESS_ADMIN_PASSWORD:-password}"
+      WORDPRESS_ADMIN_EMAIL: "${WORDPRESS_ADMIN_EMAIL:-admin@example.test}"
+    volumes:
+      - wordpress-db:/var/lib/mysql
+      - wordpress-uploads:/var/www/html/wp-content/uploads
+
+volumes:
+  wordpress-db:
+  wordpress-uploads:

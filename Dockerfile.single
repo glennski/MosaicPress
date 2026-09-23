@@ -1,0 +1,26 @@
+FROM node:24-bookworm AS assets
+
+WORKDIR /workspace
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY . .
+RUN npm run build:dev
+
+FROM wordpress:php8.4-apache
+
+RUN apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends curl mariadb-client mariadb-server \
+	&& curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/local/bin/wp \
+	&& chmod +x /usr/local/bin/wp \
+	&& rm -rf /var/lib/apt/lists/*
+
+COPY --from=assets /workspace/src/ /var/www/html/
+COPY docker/single/wp-config.php /var/www/wp-config.php
+COPY docker/single/entrypoint.sh /usr/local/bin/mosaicpress-entrypoint
+
+RUN chmod +x /usr/local/bin/mosaicpress-entrypoint \
+	&& chown -R www-data:www-data /var/www/html
+
+ENTRYPOINT ["mosaicpress-entrypoint"]

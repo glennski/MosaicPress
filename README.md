@@ -27,6 +27,30 @@ You will also need a container environment such as [Docker Desktop](https://www.
 
 **Note:** WordPress currently only officially supports Docker but several container environments are available and should generally be compatible, such as [Colima](https://github.com/abiosoft/colima), [OrbStack](https://orbstack.dev/), [Podman Desktop](https://podman-desktop.io/), and [Rancher Desktop](https://rancherdesktop.io/).
 
+### Single-container preview
+
+For a disposable frontend and admin preview without installing Node, Composer, or a separate database locally, run:
+
+```
+docker compose -f docker-compose.single.yml up --build
+```
+
+The image builds the frontend assets from the current checkout, starts Apache/PHP and MariaDB in one container, and installs or upgrades WordPress automatically. Open http://localhost:8080 (admin: http://localhost:8080/wp-admin) and log in with `admin` / `password`.
+
+Database and uploads are retained in Docker volumes. To test a changed checkout, run the same command again with `--build`; to start from scratch, use `docker compose -f docker-compose.single.yml down -v`. Set `HTTP_PORT` and the matching `WORDPRESS_URL` if port 8080 is occupied, for example on macOS/Linux:
+
+```
+HTTP_PORT=8081 WORDPRESS_URL=http://localhost:8081 docker compose -f docker-compose.single.yml up --build
+```
+
+In PowerShell use:
+
+```
+$env:HTTP_PORT = '8081'; $env:WORDPRESS_URL = 'http://localhost:8081'; docker compose -f docker-compose.single.yml up --build
+```
+
+This setup uses development credentials and puts the web server and database into one container, so it is only for local testing.
+
 ### Development Environment Commands
 
 Ensure your container environment is running before using these commands.
