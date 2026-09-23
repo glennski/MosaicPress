@@ -2271,7 +2271,7 @@ function maybe_add_existing_user_to_blog() {
 			home_url(),
 			admin_url()
 		),
-		__( 'WordPress &rsaquo; Success' ),
+		__( 'MosaicPress &rsaquo; Success' ),
 		array( 'response' => 200 )
 	);
 }

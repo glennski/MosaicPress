@@ -1,10 +1,10 @@
 {
-	"name": "WordPress",
-	"version": "7.2.0",
-	"description": "WordPress is open source software you can use to create a beautiful website, blog, or app.",
+	"name": "mosaicpress",
+	"version": "1.0.0",
+	"description": "MosaicPress is an independent CMS evolving from the WordPress codebase.",
 	"repository": {
-		"type": "svn",
-		"url": "https://develop.svn.wordpress.org/trunk"
+		"type": "git",
+		"url": "https://github.com/glennski/MosaicPress.git"
 	},
 	"gutenberg": {
 		"sha": "5715a61334c4d29f21b67cf34b46061dc1b62502",
@@ -25,7 +25,7 @@
 			"onFail": "error"
 		}
 	},
-	"author": "The WordPress Contributors",
+	"author": "The MosaicPress Contributors",
 	"license": "GPL-2.0-or-later",
 	"browserslist": [
 		"> 1%",
@@ -40,10 +40,13 @@
 	],
 	"devDependencies": {
 		"@343dev/gifsicle": "1.2.0",
+		"@babel/core": "7.29.7",
+		"@babel/preset-react": "7.22.15",
 		"@lodder/grunt-postcss": "^3.1.1",
 		"@napi-rs/image": "1.14.0",
 		"@playwright/test": "1.61.1",
 		"@pmmmwh/react-refresh-webpack-plugin": "0.6.2",
+		"@tailwindcss/postcss": "4.3.3",
 		"@types/codemirror": "5.60.17",
 		"@types/espree": "10.1.0",
 		"@types/htmlhint": "1.1.5",
@@ -54,8 +57,12 @@
 		"@wordpress/prettier-config": "4.51.0",
 		"@wordpress/scripts": "33.0.0",
 		"autoprefixer": "10.5.3",
+		"babel-loader": "9.2.1",
 		"chalk": "5.6.2",
 		"check-node-version": "4.2.1",
+		"class-variance-authority": "0.7.1",
+		"clsx": "2.1.1",
+		"css-loader": "6.7.3",
 		"cssnano": "7.1.9",
 		"dotenv": "17.4.2",
 		"dotenv-expand": "13.0.0",
@@ -78,16 +85,21 @@
 		"grunt-webpack": "7.0.1",
 		"install-changed": "1.1.0",
 		"json2php": "0.0.12",
+		"mini-css-extract-plugin": "2.10.2",
 		"minimizer-webpack-plugin": "5.6.1",
 		"php-array-reader": "2.1.4",
 		"postcss": "8.5.19",
+		"postcss-loader": "6.2.1",
 		"prettier": "npm:wp-prettier@3.0.3",
 		"qunit": "~2.26.0",
+		"react-aria-components": "1.12.2",
 		"react-refresh": "0.14.0",
 		"sass": "1.101.0",
 		"sinon": "16.1.3",
 		"sinon-test": "~3.1.6",
 		"source-map-loader": "5.0.0",
+		"tailwind-merge": "3.7.0",
+		"tailwindcss": "4.3.3",
 		"typescript": "6.0.3",
 		"update-browserslist-db": "1.3.1",
 		"uuid": "14.0.1",
@@ -129,9 +141,10 @@
 		"zod": "3.25.1"
 	},
 	"scripts": {
-		"playground": "npx --yes @wp-playground/cli@latest server --mount-dir-before-install=build /wordpress --login",
+		"playground": "node tools/playground/server.mjs",
 		"build": "node --no-maglev --no-concurrent-sparkplug node_modules/grunt/bin/grunt build",
 		"build:dev": "node --no-maglev --no-concurrent-sparkplug node_modules/grunt/bin/grunt build --dev",
+		"build:admin": "node ./tools/webpack/mosaicpress.js",
 		"build:gutenberg": "node --no-maglev --no-concurrent-sparkplug node_modules/grunt/bin/grunt build:gutenberg",
 		"dev": "node --no-maglev --no-concurrent-sparkplug node_modules/grunt/bin/grunt watch --dev",
 		"test": "node --no-maglev --no-concurrent-sparkplug node_modules/grunt/bin/grunt test",

@@ -155,6 +155,8 @@ if ( isset( $_REQUEST['taxonomy'] ) && taxonomy_exists( $_REQUEST['taxonomy'] ) 
 	$taxnow = '';
 }
 
+require ABSPATH . 'wp-admin/includes/mosaicpress-admin.php';
+
 if ( WP_NETWORK_ADMIN ) {
 	require ABSPATH . 'wp-admin/network/menu.php';
 } elseif ( WP_USER_ADMIN ) {

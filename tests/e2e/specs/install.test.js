@@ -140,7 +140,7 @@ test.describe( 'WordPress installation process', () => {
 		await page.getByLabel( /Confirm use of weak password/ ).check()
 		await page.getByLabel( 'Your Email' ).fill( 'test@example.com' );
 
-		await page.getByRole( 'button', { name: 'Install WordPress' } ).click();
+		await page.getByRole( 'button', { name: 'Install MosaicPress' } ).click();
 
 		// Installation finished, can now log in.
 
@@ -159,7 +159,7 @@ test.describe( 'WordPress installation process', () => {
 		await page.getByRole( 'button', { name: 'Log In' } ).click();
 
 		await expect(
-			page.getByRole( 'heading', { name: 'Welcome to WordPress', level: 2 })
+			page.getByRole( 'heading', { name: 'Welcome to MosaicPress', level: 2 })
 		).toBeVisible();
 	} );
 } );

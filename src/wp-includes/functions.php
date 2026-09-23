@@ -4430,7 +4430,7 @@ function _wp_die_process_input( $message, $title = '', $args = array() ) {
 		$args['response'] = 500;
 	}
 	if ( empty( $title ) ) {
-		$title = $have_gettext ? __( 'WordPress &rsaquo; Error' ) : 'WordPress &rsaquo; Error';
+		$title = $have_gettext ? __( 'MosaicPress &rsaquo; Error' ) : 'MosaicPress &rsaquo; Error';
 	}
 	if ( empty( $args['text_direction'] ) || ! in_array( $args['text_direction'], array( 'ltr', 'rtl' ), true ) ) {
 		$args['text_direction'] = 'ltr';
@@ -9171,6 +9171,17 @@ function wp_get_wp_version() {
 	}
 
 	return $wp_version;
+}
+
+/**
+ * Returns the MosaicPress product version.
+ *
+ * @return string
+ */
+function mosaicpress_get_version() {
+	global $mosaicpress_version;
+
+	return $mosaicpress_version;
 }
 
 /**

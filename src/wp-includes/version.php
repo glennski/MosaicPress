@@ -9,6 +9,16 @@
  */
 
 /**
+ * The MosaicPress product version.
+ *
+ * Kept separate from $wp_version while inherited WordPress compatibility,
+ * updates, and translations still key off the WordPress version.
+ *
+ * @global string $mosaicpress_version
+ */
+$mosaicpress_version = '1.0.0';
+
+/**
  * The WordPress version string.
  *
  * Holds the current version number for WordPress core. Used to bust caches

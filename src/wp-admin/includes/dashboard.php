@@ -2082,7 +2082,7 @@ function wp_dashboard_empty() {}
  * @since 5.9.0 Send users to the Site Editor if the active theme is block-based.
  */
 function wp_welcome_panel() {
-	list( $display_version ) = explode( '-', wp_get_wp_version() );
+	$display_version         = mosaicpress_get_version();
 	$can_customize           = current_user_can( 'customize' );
 	$is_block_theme          = wp_is_block_theme();
 	?>
@@ -2092,12 +2092,12 @@ function wp_welcome_panel() {
 			<div class="welcome-panel-header-image">
 				<?php echo file_get_contents( dirname( __DIR__ ) . '/images/dashboard-background.svg' ); ?>
 			</div>
-			<h2><?php _e( 'Welcome to WordPress!' ); ?></h2>
+			<h2><?php _e( 'Welcome to MosaicPress!' ); ?></h2>
 			<p>
 				<a href="<?php echo esc_url( admin_url( 'about.php' ) ); ?>">
 				<?php
-					/* translators: %s: Current WordPress version. */
-					printf( __( 'Learn more about the %s version.' ), esc_html( $display_version ) );
+					/* translators: %s: Current MosaicPress version. */
+					printf( __( 'Learn more about MosaicPress %s.' ), esc_html( $display_version ) );
 				?>
 				</a>
 			</p>

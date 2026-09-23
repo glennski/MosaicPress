@@ -77,16 +77,16 @@ header( 'Content-Type: ' . get_option( 'html_type' ) . '; charset=' . get_option
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php echo get_option( 'blog_charset' ); ?>" />
 	<meta name="robots" content="noindex,nofollow" />
-	<title><?php _e( 'WordPress &rsaquo; Update' ); ?></title>
+	<title><?php _e( 'MosaicPress &rsaquo; Update' ); ?></title>
 	<?php wp_admin_css( 'install', true ); ?>
 </head>
 <body class="wp-core-ui admin-color-modern">
-<p id="logo"><?php _e( 'WordPress' ); ?></p>
+<p id="logo"><?php _e( 'MosaicPress' ); ?></p>
 
 <?php if ( (int) get_option( 'db_version' ) === $wp_db_version || ! is_blog_installed() ) : ?>
 
 <h1><?php _e( 'No Update Required' ); ?></h1>
-<p><?php _e( 'Your WordPress database is already up to date!' ); ?></p>
+<p><?php _e( 'Your MosaicPress database is already up to date!' ); ?></p>
 <p class="step"><a class="button button-large" href="<?php echo esc_url( get_option( 'home' ) ); ?>/"><?php _e( 'Continue' ); ?></a></p>
 
 	<?php

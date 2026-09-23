@@ -17,11 +17,11 @@ header( 'Content-Type: text/html; charset=utf-8' );
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="noindex,nofollow" />
-	<title><?php _e( 'WordPress &rsaquo; Database Repair' ); ?></title>
+	<title><?php _e( 'MosaicPress &rsaquo; Database Repair' ); ?></title>
 	<?php wp_admin_css( 'install', true ); ?>
 </head>
 <body class="wp-core-ui admin-color-modern">
-<p id="logo"><?php _e( 'WordPress' ); ?></p>
+<p id="logo"><?php _e( 'MosaicPress' ); ?></p>
 
 <?php
 
@@ -173,13 +173,13 @@ if ( ! defined( 'WP_ALLOW_REPAIR' ) || ! WP_ALLOW_REPAIR ) {
 
 	echo '<h1 class="screen-reader-text">' .
 		/* translators: Hidden accessibility text. */
-		__( 'WordPress database repair' ) .
+		__( 'MosaicPress database repair' ) .
 	'</h1>';
 
 	if ( isset( $_GET['referrer'] ) && 'is_blog_installed' === $_GET['referrer'] ) {
-		echo '<p>' . __( 'One or more database tables are unavailable. To allow WordPress to attempt to repair these tables, press the &#8220;Repair Database&#8221; button. Repairing can take a while, so please be patient.' ) . '</p>';
+		echo '<p>' . __( 'One or more database tables are unavailable. To allow MosaicPress to attempt to repair these tables, press the &#8220;Repair Database&#8221; button. Repairing can take a while, so please be patient.' ) . '</p>';
 	} else {
-		echo '<p>' . __( 'WordPress can automatically look for some common database problems and repair them. Repairing can take a while, so please be patient.' ) . '</p>';
+		echo '<p>' . __( 'MosaicPress can automatically look for some common database problems and repair them. Repairing can take a while, so please be patient.' ) . '</p>';
 	}
 	?>
 	<p class="step"><a class="button button-large" href="repair.php?repair=1"><?php _e( 'Repair Database' ); ?></a></p>

@@ -1,6 +1,8 @@
-# WordPress
+# MosaicPress
 
-Welcome to the WordPress development repository! Please check out the [contributor handbook](https://make.wordpress.org/core/handbook/) for information about how to open bug reports, contribute patches, test changes, write documentation, or get involved in any way you can.
+MosaicPress is an independent CMS that starts from the [WordPress development tree](https://github.com/WordPress/wordpress-develop). WordPress stays the reference upstream. MosaicPress has its own version, `1.0.0` in `$mosaicpress_version`, and its own release branches.
+
+Active work for this release is on `feature/1.0.0`. It merges into `dev`, and releases land on `main`.
 
 * [Getting Started](#getting-started)
 * [Credentials](#credentials)
@@ -9,7 +11,7 @@ Welcome to the WordPress development repository! Please check out the [contribut
 
 ### Local development
 
-WordPress is a PHP, MySQL, and JavaScript based project, and uses Node for its JavaScript dependencies. A local development environment is available to quickly get up and running.
+MosaicPress is a PHP, MySQL, and JavaScript project, and uses Node for its JavaScript dependencies. A local development environment is available to quickly get up and running.
 
 You will need a basic understanding of how to use the command line on your computer. This will allow you to set up the local development environment, to start it and stop it when necessary, and to run the tests.
 
@@ -25,18 +27,18 @@ If you are not using a package manager, see the [Node.js download page](https://
 
 For the full local development environment commands below, you will also need a container environment such as [Docker Desktop](https://www.docker.com/products/docker-desktop) installed and running on your computer. WordPress Playground does not require it.
 
-**Note:** WordPress currently only officially supports Docker but several container environments are available and should generally be compatible, such as [Colima](https://github.com/abiosoft/colima), [OrbStack](https://orbstack.dev/), [Podman Desktop](https://podman-desktop.io/), and [Rancher Desktop](https://rancherdesktop.io/).
+**Note:** The inherited environment officially supports Docker. Other container environments are generally compatible, such as [Colima](https://github.com/abiosoft/colima), [OrbStack](https://orbstack.dev/), [Podman Desktop](https://podman-desktop.io/), and [Rancher Desktop](https://rancherdesktop.io/).
 
 ### Browser preview with WordPress Playground
 
-For a disposable browser preview of the current checkout, first build WordPress:
+For a disposable browser preview of the current checkout, first build it:
 
 ```
 npm run build
 npm run playground
 ```
 
-This starts [WordPress Playground](https://developer.wordpress.org/playground/), mounts the built `build` directory before installation so its SQLite setup is retained, and logs you in as an administrator. Rebuild after source changes. The first run downloads the Playground runtime and prints its local URL; stop it with `Ctrl+C`.
+This starts [WordPress Playground](https://developer.wordpress.org/playground/), mounts the built `build` directory before installation so its SQLite setup is retained, and logs you in as an administrator. Under **Tools → Mosaic Playground**, the preview provides server status, restart, stop, and reset controls. They are injected only into the local Playground build; manual and production builds do not contain them. Rebuild after source changes. The first run downloads the Playground runtime and prints its local URL; stop it with `Ctrl+C`.
 
 In PowerShell, use `powershell -ExecutionPolicy Bypass -File .\playground.ps1`; on macOS/Linux, use `sh ./playground.sh`. Additional Playground options are passed through, for example `powershell -ExecutionPolicy Bypass -File .\playground.ps1 --port=9500`.
 
@@ -46,22 +48,23 @@ Ensure your container environment is running before using these commands.
 
 #### To start the development environment for the first time
 
-You can get started using the local development environment with these steps:
+Clone the repository and check out the active release branch:
 
-1. Go to https://github.com/WordPress/wordpress-develop and fork the repository to your own GitHub account. 
-1. Then clone the forked repository to your computer using `git clone https://github.com/<your-username>/wordpress-develop.git`.
-1. Navigate into the directory for the cloned repository using `cd wordpress-develop`.
-1. Add the origin repo as an `upstream` remote via `git remote add upstream https://github.com/WordPress/wordpress-develop.git`.
-1. Then you can keep your branches up to date via `git pull --ff upstream trunk`, for example.
+```
+git clone https://github.com/glennski/MosaicPress.git
+cd MosaicPress
+git checkout feature/1.0.0
+```
 
-Alternatively, if you have the [GitHub CLI](https://cli.github.com/) installed, you can simply run `gh repo fork WordPress/wordpress-develop --clone` ([docs](https://cli.github.com/manual/gh_repo_fork)). This command will:
-1. Fork the repository to your account (use the `--org` flag to clone into an organization).
-1. Clone the repository to your machine. 
-1. Add `WordPress/wordpress-develop` as `upstream` and set it to the default `remote` repository
+`origin` is [glennski/MosaicPress](https://github.com/glennski/MosaicPress). WordPress stays on `upstream`:
 
-After this, remember to run `cd wordpress-develop`.
+```
+git remote add upstream https://github.com/WordPress/wordpress-develop.git
+```
 
-Once you have forked and cloned the repository to your computer, run the following commands in a terminal:
+Upstream changes are reviewed and ported on purpose. They are not merged in wholesale.
+
+Then install dependencies and start the environment:
 
 ```
 npm install
@@ -70,7 +73,7 @@ npm run env:start
 npm run env:install
 ```
 
-Your WordPress site will be accessible at http://localhost:8889. You can see or change configurations in the `.env` file located at the root of the project directory.
+The site will be accessible at http://localhost:8889. You can see or change configurations in the `.env` file located at the root of the project directory.
 
 #### To watch for changes
 

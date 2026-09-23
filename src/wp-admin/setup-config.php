@@ -108,11 +108,11 @@ function setup_config_display_header( $body_classes = array() ) {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="noindex,nofollow" />
-	<title><?php _e( 'WordPress &rsaquo; Setup Configuration File' ); ?></title>
+	<title><?php _e( 'MosaicPress &rsaquo; Setup Configuration File' ); ?></title>
 	<?php wp_admin_css( 'install', true ); ?>
 </head>
 <body class="<?php echo implode( ' ', $body_classes ); ?>">
-<p id="logo"><?php _e( 'WordPress' ); ?></p>
+<p id="logo"><?php _e( 'MosaicPress' ); ?></p>
 	<?php
 } // End function setup_config_display_header();
 
@@ -133,7 +133,7 @@ switch ( $step ) {
 			$languages = wp_get_available_translations();
 			if ( $languages ) {
 				setup_config_display_header( 'language-chooser' );
-				echo '<h1 class="screen-reader-text">Welcome to WordPress</h1>';
+				echo '<h1 class="screen-reader-text">Welcome to MosaicPress</h1>';
 				echo '<form id="setup" method="post" action="?step=0">';
 				wp_install_language_form( $languages );
 				echo '</form>';
@@ -167,13 +167,13 @@ switch ( $step ) {
 		_e( 'Before getting started' );
 		?>
 </h1>
-<p><?php _e( 'Welcome to WordPress. Before getting started, you will need to know the following items.' ); ?></p>
+<p><?php _e( 'Welcome to MosaicPress. Before getting started, you will need to know the following items.' ); ?></p>
 <ol>
 	<li><?php _e( 'Database name' ); ?></li>
 	<li><?php _e( 'Database username' ); ?></li>
 	<li><?php _e( 'Database password' ); ?></li>
 	<li><?php _e( 'Database host' ); ?></li>
-	<li><?php _e( 'Table prefix (if you want to run more than one WordPress in a single database)' ); ?></li>
+	<li><?php _e( 'Table prefix (if you want to run more than one MosaicPress installation in a single database)' ); ?></li>
 </ol>
 <p>
 		<?php
@@ -228,7 +228,7 @@ switch ( $step ) {
 		<tr>
 			<th scope="row"><label for="dbname"><?php _e( 'Database Name' ); ?></label></th>
 			<td><input name="dbname" id="dbname" type="text" aria-describedby="dbname-desc" size="25" placeholder="wordpress"<?php echo $autofocus; ?> />
-			<p id="dbname-desc"><?php _e( 'The name of the database you want to use with WordPress.' ); ?></p></td>
+			<p id="dbname-desc"><?php _e( 'The name of the database you want to use with MosaicPress.' ); ?></p></td>
 		</tr>
 		<tr>
 			<th scope="row"><label for="uname"><?php _e( 'Username' ); ?></label></th>
@@ -261,7 +261,7 @@ switch ( $step ) {
 		<tr>
 			<th scope="row"><label for="prefix"><?php _e( 'Table Prefix' ); ?></label></th>
 			<td><input name="prefix" id="prefix" type="text" aria-describedby="prefix-desc" value="wp_" size="25" />
-			<p id="prefix-desc"><?php _e( 'If you want to run multiple WordPress installations in a single database, change this.' ); ?></p></td>
+			<p id="prefix-desc"><?php _e( 'If you want to run multiple MosaicPress installations in a single database, change this.' ); ?></p></td>
 		</tr>
 	</table>
 		<?php
@@ -506,7 +506,7 @@ if ( ! /iPad|iPod|iPhone/.test( navigator.userAgent ) ) {
 				_e( 'Successful database connection' );
 				?>
 </h1>
-<p><?php _e( 'All right, sparky! You&#8217;ve made it through this part of the installation. WordPress can now communicate with your database. If you are ready, time now to&hellip;' ); ?></p>
+<p><?php _e( 'All right, sparky! You&#8217;ve made it through this part of the installation. MosaicPress can now communicate with your database. If you are ready, time now to&hellip;' ); ?></p>
 
 <p class="step"><a href="<?php echo $install; ?>" class="button button-large"><?php _e( 'Run the installation' ); ?></a></p>
 				<?php

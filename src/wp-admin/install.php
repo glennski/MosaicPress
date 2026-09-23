@@ -17,7 +17,7 @@ if ( false ) {
 </head>
 <body class="wp-core-ui admin-color-modern">
 	<h1>Error: PHP is not running</h1>
-	<p>WordPress requires that your web server is running PHP. Your server does not have PHP installed, or PHP is turned off.</p>
+	<p>MosaicPress requires that your web server is running PHP. Your server does not have PHP installed, or PHP is turned off.</p>
 </body>
 </html>
 	<?php
@@ -69,11 +69,11 @@ function display_header( $body_classes = '' ) {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="noindex,nofollow" />
-	<title><?php _e( 'WordPress &rsaquo; Installation' ); ?></title>
+	<title><?php _e( 'MosaicPress &rsaquo; Installation' ); ?></title>
 	<?php wp_admin_css( 'install', true ); ?>
 </head>
 <body class="wp-core-ui admin-color-modern<?php echo $body_classes; ?>">
-<p id="logo"><?php _e( 'WordPress' ); ?></p>
+<p id="logo"><?php _e( 'MosaicPress' ); ?></p>
 
 	<?php
 } // End display_header().
@@ -209,7 +209,7 @@ function display_setup_form( $error = null ) {
 			</td>
 		</tr>
 	</table>
-	<p class="step"><?php submit_button( __( 'Install WordPress' ), 'large', 'Submit', false, array( 'id' => 'submit' ) ); ?></p>
+	<p class="step"><?php submit_button( __( 'Install MosaicPress' ), 'large', 'Submit', false, array( 'id' => 'submit' ) ); ?></p>
 	<input type="hidden" name="language" value="<?php echo isset( $_REQUEST['language'] ) ? esc_attr( $_REQUEST['language'] ) : ''; ?>" />
 </form>
 	<?php
@@ -386,7 +386,7 @@ switch ( $step ) {
 		display_header();
 		?>
 <h1><?php _ex( 'Welcome', 'Howdy' ); ?></h1>
-<p><?php _e( 'Welcome to the famous five-minute WordPress installation process! Just fill in the information below and you&#8217;ll be on your way to using the most extendable and powerful personal publishing platform in the world.' ); ?></p>
+<p><?php _e( 'Welcome to the MosaicPress installation. Fill in the information below and you&#8217;ll be on your way to using your new site.' ); ?></p>
 
 <h2><?php _e( 'Information needed' ); ?></h2>
 <p><?php _e( 'Please provide the following information. Do not worry, you can always change these settings later.' ); ?></p>
@@ -447,7 +447,7 @@ switch ( $step ) {
 
 <h1><?php _e( 'Success!' ); ?></h1>
 
-<p><?php _e( 'WordPress has been installed. Thank you, and enjoy!' ); ?></p>
+<p><?php _e( 'MosaicPress has been installed. Thank you, and enjoy!' ); ?></p>
 
 <table class="form-table install-success">
 	<tr>

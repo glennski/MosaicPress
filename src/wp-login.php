@@ -73,7 +73,7 @@ function login_header( $title = null, $message = '', $wp_error = null ) {
 	$login_title = get_bloginfo( 'name', 'display' );
 
 	/* translators: Login screen title. 1: Login screen name, 2: Network or site name. */
-	$login_title = sprintf( __( '%1$s &lsaquo; %2$s &#8212; WordPress' ), $title, $login_title );
+	$login_title = sprintf( __( '%1$s &lsaquo; %2$s &#8212; MosaicPress' ), $title, $login_title );
 
 	if ( wp_is_recovery_mode() ) {
 		/* translators: %s: Login screen title. */
@@ -126,7 +126,7 @@ function login_header( $title = null, $message = '', $wp_error = null ) {
 	 */
 	do_action( 'login_head' );
 
-	$login_header_url = __( 'https://wordpress.org/' );
+	$login_header_url = home_url( '/' );
 
 	/**
 	 * Filters link URL of the header logo above login form.
@@ -155,7 +155,7 @@ function login_header( $title = null, $message = '', $wp_error = null ) {
 		__( 'Usage of the title attribute on the login logo is not recommended for accessibility reasons. Use the link text instead.' )
 	);
 
-	$login_header_text = empty( $login_header_title ) ? __( 'Powered by WordPress' ) : $login_header_title;
+	$login_header_text = empty( $login_header_title ) ? __( 'Powered by MosaicPress' ) : $login_header_title;
 
 	/**
 	 * Filters the link text of the header logo above the login form.

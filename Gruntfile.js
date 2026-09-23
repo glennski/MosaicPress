@@ -1613,6 +1613,12 @@ module.exports = function(grunt) {
 						cwd: BUILD_DIR + 'wp-includes/js/dist/script-modules/',
 						src: [ '**/*.js' ],
 						dest: BUILD_DIR + 'wp-includes/js/dist/script-modules/',
+					},
+					{
+						expand: true,
+						cwd: BUILD_DIR + 'wp-admin/js/',
+						src: [ 'mosaicpress-admin.js' ],
+						dest: BUILD_DIR + 'wp-admin/js/',
 					}
 				]
 			}

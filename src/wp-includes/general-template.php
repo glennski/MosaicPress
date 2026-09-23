@@ -5499,25 +5499,25 @@ function get_the_generator( $type = '' ) {
 
 	switch ( $type ) {
 		case 'html':
-			$gen = '<meta name="generator" content="WordPress ' . esc_attr( get_bloginfo( 'version' ) ) . '">';
+			$gen = '<meta name="generator" content="MosaicPress ' . esc_attr( mosaicpress_get_version() ) . '">';
 			break;
 		case 'xhtml':
-			$gen = '<meta name="generator" content="WordPress ' . esc_attr( get_bloginfo( 'version' ) ) . '" />';
+			$gen = '<meta name="generator" content="MosaicPress ' . esc_attr( mosaicpress_get_version() ) . '" />';
 			break;
 		case 'atom':
-			$gen = '<generator uri="https://wordpress.org/" version="' . esc_attr( get_bloginfo_rss( 'version' ) ) . '">WordPress</generator>';
+			$gen = '<generator uri="https://github.com/glennski/MosaicPress" version="' . esc_attr( mosaicpress_get_version() ) . '">MosaicPress</generator>';
 			break;
 		case 'rss2':
-			$gen = '<generator>' . sanitize_url( 'https://wordpress.org/?v=' . get_bloginfo_rss( 'version' ) ) . '</generator>';
+			$gen = '<generator>' . sanitize_url( 'https://github.com/glennski/MosaicPress/?v=' . mosaicpress_get_version() ) . '</generator>';
 			break;
 		case 'rdf':
-			$gen = '<admin:generatorAgent rdf:resource="' . sanitize_url( 'https://wordpress.org/?v=' . get_bloginfo_rss( 'version' ) ) . '" />';
+			$gen = '<admin:generatorAgent rdf:resource="' . sanitize_url( 'https://github.com/glennski/MosaicPress/?v=' . mosaicpress_get_version() ) . '" />';
 			break;
 		case 'comment':
-			$gen = '<!-- generator="WordPress/' . esc_attr( get_bloginfo( 'version' ) ) . '" -->';
+			$gen = '<!-- generator="MosaicPress/' . esc_attr( mosaicpress_get_version() ) . '" -->';
 			break;
 		case 'export':
-			$gen = '<!-- generator="WordPress/' . esc_attr( get_bloginfo_rss( 'version' ) ) . '" created="' . gmdate( 'Y-m-d H:i' ) . '" -->';
+			$gen = '<!-- generator="MosaicPress/' . esc_attr( mosaicpress_get_version() ) . '" created="' . gmdate( 'Y-m-d H:i' ) . '" -->';
 			break;
 	}
 

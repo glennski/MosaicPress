@@ -1,5 +1,6 @@
 const mediaConfig = require( './tools/webpack/media' );
 const developmentConfig = require( './tools/webpack/development' );
+const mosaicpressConfig = require( './tools/webpack/mosaicpress' );
 
 module.exports = function (
 	env = { environment: 'production', watch: false, buildTarget: false }
@@ -19,6 +20,7 @@ module.exports = function (
 	const config = [
 		mediaConfig( env ),
 		...developmentConfig( env ),
+		mosaicpressConfig( env ),
 	];
 
 	return config;
