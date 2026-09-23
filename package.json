@@ -129,6 +129,7 @@
 		"zod": "3.25.1"
 	},
 	"scripts": {
+		"playground": "npx --yes @wp-playground/cli@latest server --mount-dir-before-install=build /wordpress --login",
 		"build": "node --no-maglev --no-concurrent-sparkplug node_modules/grunt/bin/grunt build",
 		"build:dev": "node --no-maglev --no-concurrent-sparkplug node_modules/grunt/bin/grunt build --dev",
 		"build:gutenberg": "node --no-maglev --no-concurrent-sparkplug node_modules/grunt/bin/grunt build:gutenberg",

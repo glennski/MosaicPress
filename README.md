@@ -21,35 +21,24 @@ You will need Node and npm installed on your computer. Node is a JavaScript runt
 
 If you are not using a package manager, see the [Node.js download page](https://nodejs.org/en/download/) for installers and binaries.
 
-**Note:** WordPress currently only officially supports Node.js `20.x` and npm `10.x`.
+**Note:** This checkout and WordPress Playground require Node.js `>=24.18.0` and npm `>=11.16.0` (see `.nvmrc`).
 
-You will also need a container environment such as [Docker Desktop](https://www.docker.com/products/docker-desktop) installed and running on your computer. The container environment is the virtualization software that powers the local development environment and can be installed just like any other regular application.
+For the full local development environment commands below, you will also need a container environment such as [Docker Desktop](https://www.docker.com/products/docker-desktop) installed and running on your computer. WordPress Playground does not require it.
 
 **Note:** WordPress currently only officially supports Docker but several container environments are available and should generally be compatible, such as [Colima](https://github.com/abiosoft/colima), [OrbStack](https://orbstack.dev/), [Podman Desktop](https://podman-desktop.io/), and [Rancher Desktop](https://rancherdesktop.io/).
 
-### Single-container preview
+### Browser preview with WordPress Playground
 
-For a disposable frontend and admin preview without installing Node, Composer, or a separate database locally, run:
-
-```
-docker compose -f docker-compose.single.yml up --build
-```
-
-The image builds the frontend assets from the current checkout, starts Apache/PHP and MariaDB in one container, and installs or upgrades WordPress automatically. Open http://localhost:8080 (admin: http://localhost:8080/wp-admin) and log in with `admin` / `password`.
-
-Database and uploads are retained in Docker volumes. To test a changed checkout, run the same command again with `--build`; to start from scratch, use `docker compose -f docker-compose.single.yml down -v`. Set `HTTP_PORT` and the matching `WORDPRESS_URL` if port 8080 is occupied, for example on macOS/Linux:
+For a disposable browser preview of the current checkout, first build WordPress:
 
 ```
-HTTP_PORT=8081 WORDPRESS_URL=http://localhost:8081 docker compose -f docker-compose.single.yml up --build
+npm run build
+npm run playground
 ```
 
-In PowerShell use:
+This starts [WordPress Playground](https://developer.wordpress.org/playground/), mounts the built `build` directory before installation so its SQLite setup is retained, and logs you in as an administrator. Rebuild after source changes. The first run downloads the Playground runtime and prints its local URL; stop it with `Ctrl+C`.
 
-```
-$env:HTTP_PORT = '8081'; $env:WORDPRESS_URL = 'http://localhost:8081'; docker compose -f docker-compose.single.yml up --build
-```
-
-This setup uses development credentials and puts the web server and database into one container, so it is only for local testing.
+In PowerShell, use `powershell -ExecutionPolicy Bypass -File .\playground.ps1`; on macOS/Linux, use `sh ./playground.sh`. Additional Playground options are passed through, for example `powershell -ExecutionPolicy Bypass -File .\playground.ps1 --port=9500`.
 
 ### Development Environment Commands
 
