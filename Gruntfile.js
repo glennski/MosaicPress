@@ -233,13 +233,12 @@ module.exports = function(grunt) {
 			}
 		},
 		clean: {
+			build: [BUILD_DIR],
 			plugins: [BUILD_DIR + 'wp-content/plugins'],
 			themes: [BUILD_DIR + 'wp-content/themes'],
 
 			// Clean the files from /build and the JS, CSS, and Webpack files from /src.
-			files: buildFiles.concat( [
-				'!wp-config.php',
-			] ).map( function( file ) {
+			files: buildFiles.map( function( file ) {
 				return setFilePath( BUILD_DIR, file );
 			} ).concat(
 				cssFiles.map( function( file ) {
@@ -2320,6 +2319,7 @@ module.exports = function(grunt) {
 			grunt.task.run( [
 				'gutenberg:verify',
 				'build:gutenberg',
+				'clean:build',
 				'build:certificates',
 				'build:files',
 				'build:js',

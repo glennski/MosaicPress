@@ -487,7 +487,7 @@ html:lang(he-il) .rtl #wpadminbar * {
 }
 
 /**
- * WP Logo
+ * MosaicPress logo
  */
 #wpadminbar #wp-admin-bar-wp-logo > .ab-item .ab-icon {
 	width: 15px;
@@ -501,9 +501,9 @@ html:lang(he-il) .rtl #wpadminbar * {
 }
 
 #wpadminbar #wp-admin-bar-wp-logo > .ab-item .ab-icon::before {
-	content: "\f120";
-	content: "\f120" / "";
-	top: 2px;
+	content: "M";
+	font: 700 15px/20px system-ui, sans-serif;
+	top: 0;
 }
 
 /*
@@ -885,8 +885,8 @@ html:lang(he-il) .rtl #wpadminbar * {
 	}
 
 	#wpadminbar #wp-admin-bar-wp-logo > .ab-item .ab-icon::before {
-		font: 28px/1 dashicons !important;
-		top: -3px;
+		font: 700 28px/46px system-ui, sans-serif !important;
+		top: 0;
 	}
 
 	#wpadminbar .ab-icon,

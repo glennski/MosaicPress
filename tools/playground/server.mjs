@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { execFile, spawn } from 'node:child_process';
 import { randomBytes, timingSafeEqual } from 'node:crypto';
+import { existsSync } from 'node:fs';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { dirname, join, resolve } from 'node:path';
@@ -33,13 +34,19 @@ function port( argumentsList ) {
 	return value;
 }
 
-function withoutOption( argumentsList, option ) {
+function withoutOption( argumentsList, ...options ) {
 	return argumentsList.filter( ( argument, index ) => {
-		if ( argument === option || argument.startsWith( `${ option }=` ) ) {
+		if ( options.some( ( option ) => argument === option || argument.startsWith( `${ option }=` ) ) ) {
 			return false;
 		}
-		return index === 0 || argumentsList[ index - 1 ] !== option;
+		return index === 0 || ! options.includes( argumentsList[ index - 1 ] );
 	} );
+}
+
+function mosaicOutput( output ) {
+	return output
+		.replaceAll( 'WordPress Playground CLI', 'MosaicPress Playground' )
+		.replaceAll( 'WordPress is running on', 'MosaicPress is running on' );
 }
 
 function selfTest() {
@@ -47,6 +54,8 @@ function selfTest() {
 	assert.equal( port( [ '--port', '9500' ] ), 9500 );
 	assert.equal( port( [ '--port=9501' ] ), 9501 );
 	assert.deepEqual( withoutOption( [ '--port', '9500', '--php=8.3' ], '--port' ), [ '--php=8.3' ] );
+	assert.deepEqual( withoutOption( [ '--wp=latest', '--php=8.3' ], '--wp', '--wordpress-install-mode' ), [ '--php=8.3' ] );
+	assert.equal( mosaicOutput( 'WordPress Playground CLI\nWordPress is running on http://localhost' ), 'MosaicPress Playground\nMosaicPress is running on http://localhost' );
 	console.log( 'Playground controller self-test passed.' );
 }
 
@@ -62,13 +71,15 @@ const controlToken = randomBytes( 32 ).toString( 'hex' );
 const controlUrl = `http://127.0.0.1:${ controlPort }/mosaic-playground`;
 const playgroundArguments = [
 	'--yes',
-	'@wp-playground/cli@latest',
+	// ponytail: pin 3.1.54; @latest needs Node >=24.18
+	'@wp-playground/cli@3.1.54',
 	'server',
+	'--wordpress-install-mode=install-from-existing-files-if-needed',
 	'--mount-dir-before-install=build',
 	'/wordpress',
 	'--login',
 	`--port=${ playgroundPort }`,
-	...withoutOption( argumentsList, '--port' ),
+	...withoutOption( argumentsList, '--port', '--wp', '--wordpress-install-mode' ),
 ];
 
 let playground;
@@ -89,10 +100,6 @@ async function writeControlsPlugin() {
 			.replaceAll( '__MOSAIC_CONTROL_TOKEN__', phpString( controlToken ) ),
 		'utf8'
 	);
-}
-
-async function removeControlsPlugin() {
-	await rm( pluginFile, { force: true } );
 }
 
 function json( response, status, value ) {
@@ -146,22 +153,24 @@ function stopProcess() {
 async function resetSite() {
 	await rm( join( build, 'wp-config.php' ), { force: true } );
 	await rm( join( build, 'wp-content', 'database' ), { force: true, recursive: true } );
+	await rm( join( build, 'wp-content', 'uploads' ), { force: true, recursive: true } );
 }
 
 function startPlayground() {
 	const executable = process.platform === 'win32' ? 'npx.cmd' : 'npx';
 	playground = spawn( executable, playgroundArguments, {
 		cwd: root,
-		stdio: 'inherit',
+		stdio: [ 'inherit', 'pipe', 'pipe' ],
 		shell: process.platform === 'win32',
 	} );
+	playground.stdout.on( 'data', ( output ) => process.stdout.write( mosaicOutput( output.toString() ) ) );
+	playground.stderr.on( 'data', ( output ) => process.stderr.write( mosaicOutput( output.toString() ) ) );
 
 	playground.once( 'exit', async ( code ) => {
 		playground = undefined;
 		if ( restarting ) {
 			return;
 		}
-		await removeControlsPlugin();
 		controlServer.close();
 		process.exit( stopping ? 0 : ( code || 1 ) );
 	} );
@@ -228,6 +237,10 @@ for ( const signal of [ 'SIGINT', 'SIGTERM' ] ) {
 		stopping = true;
 		void stopProcess();
 	} );
+}
+
+if ( ! existsSync( join( build, 'wp-load.php' ) ) ) {
+	throw new Error( 'Kein MosaicPress-Build gefunden. Zuerst `npm run build` ausführen.' );
 }
 
 await writeControlsPlugin();

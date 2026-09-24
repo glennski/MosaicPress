@@ -23,13 +23,13 @@ You will need Node and npm installed on your computer. Node is a JavaScript runt
 
 If you are not using a package manager, see the [Node.js download page](https://nodejs.org/en/download/) for installers and binaries.
 
-**Note:** This checkout and WordPress Playground require Node.js `>=24.18.0` and npm `>=11.16.0` (see `.nvmrc`).
+**Note:** This checkout and the Playground preview require Node.js `>=24.16.0` and npm `>=11.13.0` (see `.nvmrc`).
 
-For the full local development environment commands below, you will also need a container environment such as [Docker Desktop](https://www.docker.com/products/docker-desktop) installed and running on your computer. WordPress Playground does not require it.
+For the full local development environment commands below, you will also need a container environment such as [Docker Desktop](https://www.docker.com/products/docker-desktop) installed and running on your computer. The Playground preview does not require it.
 
 **Note:** The inherited environment officially supports Docker. Other container environments are generally compatible, such as [Colima](https://github.com/abiosoft/colima), [OrbStack](https://orbstack.dev/), [Podman Desktop](https://podman-desktop.io/), and [Rancher Desktop](https://rancherdesktop.io/).
 
-### Browser preview with WordPress Playground
+### Browser preview with Playground
 
 For a disposable browser preview of the current checkout, first build it:
 
@@ -38,7 +38,7 @@ npm run build
 npm run playground
 ```
 
-This starts [WordPress Playground](https://developer.wordpress.org/playground/), mounts the built `build` directory before installation so its SQLite setup is retained, and logs you in as an administrator. Under **Tools → Mosaic Playground**, the preview provides server status, restart, stop, and reset controls. They are injected only into the local Playground build; manual and production builds do not contain them. Rebuild after source changes. The first run downloads the Playground runtime and prints its local URL; stop it with `Ctrl+C`.
+Each `npm run build` recreates the `build/` directory from scratch, so Playground runtime files from a previous session do not carry over. The preview mounts that build, does not download WordPress, and logs you in as an administrator. SQLite data and uploads persist only for the current Playground session; use **Daten zurücksetzen & neu starten** in **Tools → Mosaic Playground** to wipe them without stopping. Under **Tools → Mosaic Playground**, the preview also provides server status, restart, and stop controls. They are injected only into the local Playground build; manual and production builds do not contain them. Rebuild after source changes. The first run downloads the Playground runtime (not WordPress) and prints its local URL; stop it with `Ctrl+C`.
 
 In PowerShell, use `powershell -ExecutionPolicy Bypass -File .\playground.ps1`; on macOS/Linux, use `sh ./playground.sh`. Additional Playground options are passed through, for example `powershell -ExecutionPolicy Bypass -File .\playground.ps1 --port=9500`.
 
